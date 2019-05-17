@@ -10,7 +10,7 @@ The application scrapes articles from the New York Times and stores their links,
 
 The applicattion allows you to save and comment on articles, so you can remember your most important details. 
 
-You can revisted saved articles or delete them. 
+You can revisit saved articles or delete them. 
 
 ## Technology 
 
