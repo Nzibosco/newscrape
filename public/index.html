@@ -43,7 +43,7 @@
 
       <!-- jumbotron as a welcome // informing users that we are scraping from the New York Times -->
       <div class="jumbotron">
-        <img src= "../public/newyorktimes.jpg" alt = "New york times">
+        <img src= "./images/newyorktimes.jpg" alt = "New york times">
         <h1 class="display-4">Newscrape</h1>
         <p class="lead">Scrape global headlines from the famous New York Times!</p>
         <hr class="my-4">
@@ -88,6 +88,7 @@ $("#scrape").on("click", function(){
             var title = data[i].title;
             var link = data[i].link;
             var summary = data[i].summary;
+            var id = data[i]._id;
             
             //empty news div first and then append each database article
             //$(".news").empty();
@@ -96,32 +97,33 @@ $("#scrape").on("click", function(){
                 + "<div class = 'card-body'>"
                 + "<a href='" + link + "'><h3 class = 'card-title'>" + title + "</h3></a>" + 
                 "<p class = 'card-text'>" + summary + "</p>" + 
-                "<a href='' class='btn btn-primary'>Save Article</a>" +
+                "<button type='button' class='btn btn-primary' dbRef = '" + id + "' " + ">Save Article</button>" +
                 "</div>" +
                 "</div>"
             );
-
-
-
-
-
-
-    //         <!-- <div class="card">
-    //         <div class="card-body">
-    //           <h5 class="card-title">Card title</h5>
-    //           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    //           <a href="#" class="btn btn-primary">Go somewhere</a>
-    //         </div>
-    //  </div> -->
         };
 
     });
-});
+
+    // api post to post saved articles in a mongodb saved articles collection 
+    // first get the title, summary and link associated to the button clicked. 
+
+// var savedArticle = {
+//   title: 
+// }
+//     $.post("/saved", savedArticle, function(){
+//       console.log("posted articles into he database");
+//     });
+ });
 
 
 
 
 });
+$(document).on("click", ".btn", function(){
+  var databaseRef = $(this).attr("dbRef");
+  console.log(databaseRef);
+})
      </script>
 
 </body>
