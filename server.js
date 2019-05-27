@@ -1,31 +1,44 @@
 // Dependencies
 var express = require("express");
-var mongojs = require("mongojs");
+//var mongojs = require("mongojs");
 // Require axios and cheerio. This makes the scraping possible
 var axios = require("axios");
 var cheerio = require("cheerio");
-var path = require("path");
+//require Morgan to log http request
+var logger = require("morgan");
+
+// require mongoose to make db schemas and models
+var mongoose = require("mongoose");
 
 // Initialize Express
 var app = express();
 var port = process.env.PORT || 3200; 
 
-app.use(express.static(__dirname + "public"));
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
+
+// Use morgan logger for logging requests
+app.use(logger("dev"));
 
 // Database configuration
 var databaseUrl = "nytdb";
 var collections = ["timesCollections"];
 
-// Hook mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
+// Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/" + databaseUrl, { useNewUrlParser: true });
+
+// // Hook mongojs configuration to the db variable
+// var db = mongojs(databaseUrl, collections);
+// db.on("error", function(error) {
+//   console.log("Database Error:", error);
+// });
 
 // Main route (simple Hello World Message)
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname + "/public/index.html"));
-});
+// app.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname + "/public/index.html"));
+// });
 
 // Retrieve data from the db
 app.get("/all", function(req, res) {
