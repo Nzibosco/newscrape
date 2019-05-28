@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Scrape News <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#" id="scrape-nav">Scrape News <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,12 +42,13 @@
       </nav>
 
       <!-- jumbotron as a welcome // informing users that we are scraping from the New York Times -->
-      <div class="jumbotron">
-        <img src= "newyorktimes.jpg" alt = "New york times">
+      <div class="jumbotron text-center text-danger" style = "background-image: url('newyorktimes.jpg'); background-repeat: no-repeat; background-position: center" >
+        <!-- <img src= "newyorktimes.jpg" alt = "New york times"> -->
         <h1 class="display-4">Newscrape</h1>
         <p class="lead">Scrape global headlines from the famous New York Times!</p>
         <hr class="my-4">
         <a class="btn btn-primary btn-lg" href="#" role="button" id="scrape">Scrape Articles Now</a>
+        <a class="btn btn-primary btn-lg" href="#" role="button" id="articles">Or checkout this existing articles</a>
       </div>
 
       <!-- card body for news scrapped -->
@@ -66,7 +67,7 @@
             </div>
      </div> -->
 
-     <script src="./index.js"></script>
+     <script src="app.js"></script>
      <!-- <script >
      
      $(document).ready(function(){

@@ -24,26 +24,18 @@ app.use(logger("dev"));
 
 // Database configuration
 var databaseUrl = "nytdb";
-var collections = ["timesCollections"];
+//var collections = ["timesCollections"];
+
+// Require all models
+var db = require("./models");
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/" + databaseUrl, { useNewUrlParser: true });
 
-// // Hook mongojs configuration to the db variable
-// var db = mongojs(databaseUrl, collections);
-// db.on("error", function(error) {
-//   console.log("Database Error:", error);
-// });
-
-// Main route (simple Hello World Message)
-// app.get("/", function(req, res) {
-//     res.sendFile(path.join(__dirname + "/public/index.html"));
-// });
-
 // Retrieve data from the db
 app.get("/all", function(req, res) {
   // Find all results from the scrapedData collection in the db
-  db.scrapedData.find({}, function(error, data) {
+  db.Article.find({}, function(error, data) {
     // Throw any errors to the console
     if (error) {
       console.log(error);
@@ -57,15 +49,21 @@ app.get("/all", function(req, res) {
 
 //delete database content
 
-app.delete("/delete", function(req, res){
-    db.scrapedData.remove({}), function(error, data){
-        if (error){
-            console.log(error);
-        }
-        else{
-            res.json(data);
-        };
-    };
+app.get("/delete", function(req, res) {
+  // Remove every article from the articles collection
+  db.Article.remove({}, function(error, response) {
+    // Log any errors to the console
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    else {
+      // Otherwise, send the mongojs response to the browser
+      // This will fire off the success function of the ajax request
+      console.log(response);
+      res.send(response);
+    }
+  });
 });
 
 // Scrape data from one site and place it into the mongodb db
@@ -79,35 +77,61 @@ app.get("/scrape", function(req, res) {
       // Save the text and href of each link enclosed in the current element
       var title = $(element).children("a").children("h2").text();
       var summary = $(element).children("a").children("p").text();
-      var link = $(element).children("a").attr("href");
+      var link = "www.nytimes.com" + $(element).children("a").attr("href");
 
-      // If this found element had both a title and a link
-      if (title && link) {
-        // Insert the data in the scrapedData db
-        db.timesCollection.insert({
-          title: title,
-          link: link,
-          summary: summary
-        },
-        function(err, inserted) {
-          if (err) {
-            // Log the error if one is encountered during the query
-            console.log(err);
-          }
-          else {
-            // Otherwise, log the inserted data
-            console.log(inserted);
-          }
+      var result = {};
+      result.title = title;
+      result.summary = summary;
+      result.link = link;
+
+      // Create a new Article using the `result` object built from scraping
+      db.Article.create(result)
+        .then(function (dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function (err) {
+          // If an error occurred, log it
+          console.log(err);
         });
-      }
     });
-  });
-
-  // Send a "Scrape Complete" message to the browser
-  res.json(response);
+  res.send("scrape complete");
+});
 });
 
+// find articles saved when save article button is clicked. 
+app.get("/articles/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Article.findOne({ _id: req.params.id })
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, grab its content and post it in savedArticles collections.
+      var saved = {};
+      saved.title =dbArticle.title;
+      saved.summary = dbArticle.summary;
+      saved.link = dbArticle.link;
 
+      db.SavedArticle.create(saved).then(function(done){
+                  // View the added result in the console
+                  console.log(done);
+                })
+                .catch(function (err) {
+                  // If an error occurred, log it
+                  console.log(err);
+                });
+      })
+
+      // after posting the article in savedArticle collection, delete it from the article collection.
+      .then(function(){
+        db.Article.remove({_id: req.params.id }, function(finish){
+          console.log(finish);
+        })
+        .catch(function (err) {
+          // If an error occurred, log it
+          console.log(err);
+        });
+      });
+      
+    });
 // Listen on port 3200
 app.listen(port, function() {
   console.log("App running on port 3200!");
