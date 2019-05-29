@@ -89,6 +89,13 @@ setTimeout(function(){
 // getting saved articles
 $("#saved-articles").on("click", function(){
     $.get("/saved", function(data){
+
+        // change the size of news div in order to accommodate saved articles
+
+    $(".news").css("width", "45%");
+    $(".saved").css("width", "50%");
+    $(".news, .saved").css("float", "left");
+
        //loop through artciles and add one by one to the DOM
        for(var i = 0; i<data.length; i++){
         console.log(data[i]);
