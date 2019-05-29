@@ -30,7 +30,12 @@ var databaseUrl = "nytdb";
 var db = require("./models");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/" + databaseUrl, { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/" + databaseUrl;
+
+mongoose.connect(MONGODB_URI);
+
+//mongoose.connect("mongodb://localhost/" + databaseUrl, { useNewUrlParser: true });
 
 // Retrieve data from the db
 app.get("/all", function(req, res) {
