@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 //get articles when scrape button is clicked
 
-$("#scrape, #scrape-nav").on("click", function(){
+$("#scrape").on("click", function(){
     //tell the database to scrape articles first
     $.get("/scrape", function(response){
       console.log("scrape command sent!");
@@ -85,6 +85,35 @@ setTimeout(function(){
     thisParent.remove();
 }, 3000);
 });
+
+// getting saved articles
+$("#saved-articles").on("click", function(){
+    $.get("/saved", function(data){
+       //loop through artciles and add one by one to the DOM
+       for(var i = 0; i<data.length; i++){
+        console.log(data[i]);
+    
+        // create Bootstrap card to holds data for each news article scrapped. 
+    
+        var title = data[i].title;
+        var link = data[i].link;
+        var summary = data[i].summary;
+        var id = data[i]._id;
+        
+        //empty news div first and then append each database article
+        //$(".news").empty();
+        $(".saved").prepend(
+            "<div class = 'card'>"
+            + "<div class = 'card-body'>"
+            + "<a href='" + link + "'><h3 class = 'card-title'>" + title + "</h3></a>" + 
+            "<p class = 'card-text'>" + summary + "</p>" + 
+            "<button type='button' class='btn saved-articles btn-primary' dbRef = '" + id + "' " + ">Add Note</button>" +
+            "</div>" +
+            "</div>"
+        );
+    };
+    });
+    });
 
 
 

@@ -52,6 +52,21 @@ app.get("/all", function(req, res) {
   });
 });
 
+// Retrieve saved articles
+app.get("/saved", function(req, res) {
+  // Find all results from the scrapedData collection in the db
+  db.SavedArticle.find({}, function(error, data) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      res.json(data);
+    }
+  });
+});
+
 //delete database content
 
 app.get("/delete", function(req, res) {
