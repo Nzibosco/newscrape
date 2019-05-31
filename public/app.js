@@ -13,7 +13,9 @@ $(document).ready(function () {
         //tell the database to scrape articles first
         $.get("/scrape", function (response) {
             console.log("scrape command sent!");
-        });
+        })
+        .then(function(scrapeDone){
+            console.log(scrapeDone);
         //proceed with getting all articles from the database
         $.get("/all", function (data) {
 
@@ -41,7 +43,7 @@ $(document).ready(function () {
                     "</div>"
                 );
             };
-
+        });
         });
     });
 
@@ -104,17 +106,17 @@ $(document).ready(function () {
 
             // change the size of news div in order to accommodate saved articles
 
-            $(".news").css("width", "45%");
-            $(".notes").css("width", "50%");
-            $(".news, .notes").css("float", "left");
+            // $(".news").css("width", "45%");
+            // $(".notes").css("width", "50%");
+            // $(".news, .notes").css("float", "left");
 
             // empty notes div and append a collapsible to add and edit notes to be triggered with a button to add note is clicked. 
-            $(".notes").empty();
-            $(".notes").append(
-                "<div class = 'collapse' id = 'collapseNotes' >" + "<input placeholder = 'add note title' id='titleinput' name='title' > <br> <br>" +
-                "<textarea id='bodyinput' name='body'></textarea> <br> <br>" +
-                "<button type= 'button' class= 'btn btn-primary'>Save note</button>" +
-                "</div>");
+            // $(".notes").empty();
+            // $(".notes").append(
+            //     "<div class = 'collapse' id = 'collapseNotes' >" + "<input placeholder = 'add note title' id='titleinput' name='title' > <br> <br>" +
+            //     "<textarea id='bodyinput' name='body'></textarea> <br> <br>" +
+            //     "<button type= 'button' class= 'btn btn-primary'>Save note</button>" +
+            //     "</div>");
         
         //loop through artciles and add one by one to the DOM
         for (var i = 0; i < data.length; i++) {
@@ -132,9 +134,11 @@ $(document).ready(function () {
                 + "<div class = 'card-body'>"
                 + "<a href='" + link + "'><h3 class = 'card-title'>" + title + "</h3></a>" +
                 "<p class = 'card-text'>" + summary + "</p>" +
-                "<button type='button' class='btn addNotes btn-primary' data-toggle='collapse' data-target='#collapseNotes' dbRef = '" + id + "' " + ">Add / see notes</button>" +
+                // a button to trigger the modal to add or read articles. 
+                "<button type='button' class='btn addNotes btn-primary' data-toggle='modal' data-target='#modalNotes' dbRef = '" + id + "' " + ">Add / see notes</button>" +
                 "</div>" +
                 "</div>"
+                
             );
         };
     });
