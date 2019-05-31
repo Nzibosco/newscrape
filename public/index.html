@@ -46,99 +46,16 @@
         <!-- <h1 class="display-4">Newscrape</h1> -->
         <p class="lead" style = "font-size: 40px; color:red; font-style: italic; font-weight: bolder">Scrape global headlines from the famous New York Times!</p>
         <a class="btn btn-primary btn-lg" href="#" role="button" id="scrape">Scrape Articles Now</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button" id="articles">Or checkout this existing articles</a>
+        <a class="btn btn-primary btn-lg" href="#" role="button" id="articles">See existing articles</a>
       </div>
 
       <!-- card body for news scrapped -->
       <div class = "news">
       </div>
       <!--div for saved articles and their associated notes-->
-      <div class = "saved">
+      <div class = "notes">
       </div>
-      <style>
-      /* div for css */
-
-      .news, .saved {
-        float:left;
-      }
-      .news {
-        margin-right: 10px;
-        border-right-style: solid;
-        padding-right: 5px;
-      }
-
-      </style>
-
-
-      <!-- <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-     </div> -->
-
      <script src="app.js"></script>
-     <!-- <script >
-     
-     $(document).ready(function(){
-
-//get articles when scrape button is clicked
-
-$("#scrape").on("click", function(){
-    //tell the database to scraoe articles first
-    $.get("/scrape", function(){
-      console.log("scrape command sent!");
-    });
-    //proceed with getting all articles from the database
-    $.get("/all", function(data){
-        //loop through artciles and add one by one to the DOM
-        for(var i = 0; i<data.length; i++){
-            console.log(data);
-
-            // create Bootstrap card to holds data for each news article scrapped. 
-
-            var title = data[i].title;
-            var link = data[i].link;
-            var summary = data[i].summary;
-            var id = data[i]._id;
-            
-            //empty news div first and then append each database article
-            //$(".news").empty();
-            $(".news").prepend(
-                "<div class = 'card'>"
-                + "<div class = 'card-body'>"
-                + "<a href='" + link + "'><h3 class = 'card-title'>" + title + "</h3></a>" + 
-                "<p class = 'card-text'>" + summary + "</p>" + 
-                "<button type='button' class='btn btn-primary' dbRef = '" + id + "' " + ">Save Article</button>" +
-                "</div>" +
-                "</div>"
-            );
-        };
-
-    });
-
-    // api post to post saved articles in a mongodb saved articles collection 
-    // first get the title, summary and link associated to the button clicked. 
-
-// var savedArticle = {
-//   title: 
-// }
-//     $.post("/saved", savedArticle, function(){
-//       console.log("posted articles into he database");
-//     });
- });
-
-
-
-
-});
-$(document).on("click", ".btn", function(){
-  var databaseRef = $(this).attr("dbRef");
-  console.log(databaseRef);
-})
-     </script> -->
-
 </body>
 
 </html>
