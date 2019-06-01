@@ -1,12 +1,9 @@
 $(document).ready(function () {
 
-    // relaod the application with the logo is clicked
+    // reload the application with the logo is clicked
     $(".navbar-brand").on("click", function(){
         location.reload();
-    })
-
-
-
+    });
     //get articles when scrape button is clicked
 
     $("#scrape").on("click", function () {
@@ -103,21 +100,6 @@ $(document).ready(function () {
 
             //empty saved div first
         $(".news").empty();
-
-            // change the size of news div in order to accommodate saved articles
-
-            // $(".news").css("width", "45%");
-            // $(".notes").css("width", "50%");
-            // $(".news, .notes").css("float", "left");
-
-            // empty notes div and append a collapsible to add and edit notes to be triggered with a button to add note is clicked. 
-            // $(".notes").empty();
-            // $(".notes").append(
-            //     "<div class = 'collapse' id = 'collapseNotes' >" + "<input placeholder = 'add note title' id='titleinput' name='title' > <br> <br>" +
-            //     "<textarea id='bodyinput' name='body'></textarea> <br> <br>" +
-            //     "<button type= 'button' class= 'btn btn-primary'>Save note</button>" +
-            //     "</div>");
-        
         //loop through artciles and add one by one to the DOM
         for (var i = 0; i < data.length; i++) {
             console.log(data[i]);
@@ -135,13 +117,43 @@ $(document).ready(function () {
                 + "<a href='" + link + "'><h3 class = 'card-title'>" + title + "</h3></a>" +
                 "<p class = 'card-text'>" + summary + "</p>" +
                 // a button to trigger the modal to add or read articles. 
-                "<button type='button' class='btn addNotes btn-primary' data-toggle='modal' data-target='#modalNotes' dbRef = '" + id + "' " + ">Add / see notes</button>" +
+                "<button type='button' id = 'addNotes' class='btn btn-primary' data-toggle='modal' data-target='#modalNotes' dbRef = '" + id + "' " + ">Add / see notes</button>" +
                 "</div>" +
                 "</div>"
                 
             );
         };
     });
+});
+
+// When you click the savenote button, get id associated to the article
+$("document").on("click", "#addNotes", function() {
+    // Grab the id associated with the article from the submit button
+     var dataId = $(this).attr("dbRef");
+    console.log(dataId);
+});
+  
+    // Now run a POST request when the savenote button through the modal is clicked
+    $("#saveNote").on("click", function(){
+    $.ajax({
+      method: "POST",
+      url: "/save/" + dataId,
+      data: {
+        // Value taken from title input
+        title: $("#noteTitle").val(),
+        // Value taken from note textarea
+        body: $("#noteBody").val()
+      }
+    })
+      // With that done
+      .then(function(data) {
+        // Log the response
+        console.log(data);
+      });
+  
+    // Also, remove the values entered in the input and textarea for note entry
+    $("#noteTitle").val("");
+    $("#noteBody").val("");
 });
 
 

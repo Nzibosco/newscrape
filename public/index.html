@@ -1,81 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Newscrape</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<!--Jquery link-->
-<script src="https://code.jquery.com/jquery.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Newscrape</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!--Jquery link-->
+  <script src="https://code.jquery.com/jquery.js"></script>
 </head>
+
 <body>
-    <!--Nav bar-->
+  <!--Nav bar-->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#" style = "font-size: 40px; color: blue; font-style: italic; font-weight: bolder">Newscrape</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#" id="saved-articles">Saved articles <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Scrape other sites
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Al Jazeera</a>
-                <a class="dropdown-item" href="#">Y Combinator</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Tennessean</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"
+      style="font-size: 40px; color: blue; font-style: italic; font-weight: bolder">Newscrape</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <!-- jumbotron as a welcome // informing users that we are scraping from the New York Times -->
-      <div class="jumbotron text-center text-danger" style = "background-image: url('newyorktimes.jpg'); background-repeat: no-repeat; background-size: 100% 100%; height: 320px; background-blend-mode:overlay" >
-        <!-- <h1 class="display-4">Newscrape</h1> -->
-        <p class="lead" style = "font-size: 40px; color:red; font-style: italic; font-weight: bolder">Scrape global headlines from the famous New York Times!</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button" id="scrape">Scrape Articles Now</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button" id="articles">See existing articles</a>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" id="saved-articles">Saved articles <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Scrape other sites
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Al Jazeera</a>
+            <a class="dropdown-item" href="#">Y Combinator</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Tennessean</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-      <!-- card body for news scrapped -->
-      <div class = "news">
-      </div>
-      <!--modal div for saved articles and their associated notes. The trigger button will be created by jquery when
+  <!-- jumbotron as a welcome // informing users that we are scraping from the New York Times -->
+  <div class="jumbotron text-center text-danger"
+    style="background-image: url('newyorktimes.jpg'); background-repeat: no-repeat; background-size: 100% 100%; height: 320px; background-blend-mode:overlay">
+    <!-- <h1 class="display-4">Newscrape</h1> -->
+    <p class="lead" style="font-size: 40px; color:red; font-style: italic; font-weight: bolder">Scrape global headlines
+      from the famous New York Times!</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button" id="scrape">Scrape Articles Now</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button" id="articles">See existing articles</a>
+  </div>
+
+  <!-- card body for news scrapped -->
+  <div class="news">
+  </div>
+  <!--modal div for saved articles and their associated notes. The trigger button will be created by jquery when
       we make an API call to get saved articles. Each article will come along with a modal trigger button-->
 
-<!-- Modal for adding / reeading notes-->
-<div class="modal fade" id="modalNotes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body notes">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+  <!-- Modal for adding / reading notes-->
+  <div class="modal fade" id="modalNotes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body notes">
+          <input type="text" id="noteTitle" placeholder="add title for your note"> <br> <br>
+          <textarea rows="5" cols="50" id="noteBody" placeholder="Add your notes here"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id ="saveNote">Save note</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-      </div>
-     <script src="app.js"></script>
+  </div>
+  <script src="app.js"></script>
 </body>
 
 </html>
