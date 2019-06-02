@@ -24,7 +24,7 @@ Newscrape is developped using the following languages and technologies:
 - Cheerio,
 - Javascript, 
 - JQuery,
-- NPM.
+- NPM,
 - Morgan,
 - Mongoose.
 
